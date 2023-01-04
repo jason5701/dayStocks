@@ -12,3 +12,4 @@ if __name__=='__main__':
   
   repo = g.get_user().get_repo(repo_name)
   repo.create_issue(title=title, body=body)
+  print('issue test done')
