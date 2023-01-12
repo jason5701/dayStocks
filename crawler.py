@@ -47,7 +47,7 @@ def extract_stock_report(url):
     company_list.append(company)
     url_list.append(url)
 
-    content = f"- " + category +", " + "<a href={url}>" + title + "</a>" + ", " + writer + ", "+ company+ "<br/>\n"
+    content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
     upload_contents += content
 
   df = pd.DataFrame({'category':category_list, 'title':title_list,'writer':writer_list,'company':company_list, 'url':url_list})
