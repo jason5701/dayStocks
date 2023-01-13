@@ -10,11 +10,12 @@ if __name__ == '__main__':
 
   seoul_timezone = timezone('Asia/Seoul')
   today = datetime.now(seoul_timezone)
-  today_date = today.strftime('%Y년 %m월 %d일')
-  today_format = today.strftime('%Y-%m-%d')
+  today_date = today.strftime('%Y-%m-%d')
 
-  url = f"http://hkconsensus.hankyung.com/apps.analysis/analysis.list?sdate={today_format}&edate={today_format}&now_page=1&search_value=&pagenum=20&search_text=&business_code="
-  upload_contents = extract_stock_report(url)
+  print(today_date)
+  # url = f"http://hkconsensus.hankyung.com/apps.analysis/analysis.list?sdate={today_date}&edate={today_date}&now_page=1&search_value=&pagenum=20&search_text=&business_code="
+  # print(url)
+  upload_contents = extract_stock_report(today_date)
 
   title = f"{today_date} 정보 알림"
 

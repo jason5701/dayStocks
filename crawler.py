@@ -8,7 +8,7 @@ warnings.filterwarnings('ignore')
 
 # import chromedriver_autoinstaller
 
-def extract_stock_report(url):
+def extract_stock_report(date):
   options = webdriver.ChromeOptions()
   options.add_argument("start-maximized")
   options.add_argument("lang=ko_KR")
@@ -19,6 +19,8 @@ def extract_stock_report(url):
 
   # path = chromedriver_autoinstaller.install()
   driver = webdriver.Chrome('chromdriver', chrome_options=options)
+  url = 'http://hkconsensus.hankyung.com/apps.analysis/analysis.list?sdate='+date+'&edate='+date+'&now_page=1&search_value=&pagenum=20&search_text=&business_code='
+  print(url)
   driver.get(url)
 
   time.sleep(2)
