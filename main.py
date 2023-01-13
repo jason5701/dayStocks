@@ -5,7 +5,8 @@ from datetime import datetime
 from pytz import timezone
 
 if __name__ == '__main__':
-  access_token = os.environ['MY_GITHUB_TOKEN']
+  access_token = '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'
+  # access_token = os.environ['MY_GITHUB_TOKEN']
   repo_name = "dayStocks"
 
   seoul_timezone = timezone('Asia/Seoul')

@@ -28,3 +28,5 @@ jobs:
         python issue.py
       env:
         MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN}}
+        CHAT_ID: ${{ secrets.CHAT_ID }}

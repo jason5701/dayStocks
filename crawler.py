@@ -2,9 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
-
-import warnings
-warnings.filterwarnings('ignore')
+from send import telegram
 
 # import chromedriver_autoinstaller
 
@@ -33,6 +31,7 @@ def extract_stock_report(date):
   company_list=[]
 
   upload_contents = ''
+  forTelegram=''
 
   elements = driver.find_elements(By.CSS_SELECTOR, "#contents > div.table_style01 > table > tbody> tr")
 
@@ -50,11 +49,14 @@ def extract_stock_report(date):
     url_list.append(url)
 
     content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
+    telegramContent=f"- {category}, [{title}]({url})', {writer}, {company}\n"
     upload_contents += content
+    forTelegram += telegramContent
 
   df = pd.DataFrame({'category':category_list, 'title':title_list,'writer':writer_list,'company':company_list, 'url':url_list})
   df.to_csv("today_report.csv",encoding='utf-8')
 
+  telegram(forTelegram)
   return upload_contents
 
 
