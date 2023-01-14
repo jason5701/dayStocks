@@ -36,20 +36,26 @@ def extract_stock_report(date):
   elements = driver.find_elements(By.CSS_SELECTOR, "#contents > div.table_style01 > table > tbody> tr")
 
   for element in elements:
-    category = element.find_element(By.CSS_SELECTOR, "td:nth-child(2)").text
-    title = element.find_element(By.CSS_SELECTOR, "td:nth-child(3)").text
-    writer = element.find_element(By.CSS_SELECTOR, "td:nth-child(4)").text
-    company = element.find_element(By.CSS_SELECTOR, "td:nth-child(5)").text
-    url = element.find_element(By.CSS_SELECTOR, "td:nth-child(3) > a").get_attribute('href')
+    isCheck = element.find_element(By.CSS_SELECTOR, 'td:nth-child(1)').text
+    if isCheck =='결과가 없습니다.':
+      content = '없음'
+      telegramContent = '없음'
+    else:
+      category = element.find_element(By.CSS_SELECTOR, "td:nth-child(2)").text
+      title = element.find_element(By.CSS_SELECTOR, "td:nth-child(3)").text
+      writer = element.find_element(By.CSS_SELECTOR, "td:nth-child(4)").text
+      company = element.find_element(By.CSS_SELECTOR, "td:nth-child(5)").text
+      url = element.find_element(By.CSS_SELECTOR, "td:nth-child(3) > a").get_attribute('href')
 
-    category_list.append(category)
-    title_list.append(title)
-    writer_list.append(writer)
-    company_list.append(company)
-    url_list.append(url)
+      category_list.append(category)
+      title_list.append(title)
+      writer_list.append(writer)
+      company_list.append(company)
+      url_list.append(url)
 
-    content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
-    telegramContent=f"- {category}, [{title}]({url})', {writer}, {company}\n"
+      content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
+      telegramContent=f"- {category}, [{title}]({url})', {writer}, {company}\n"
+
     upload_contents += content
     forTelegram += telegramContent
 
