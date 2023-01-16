@@ -12,7 +12,6 @@ if __name__ == '__main__':
   today = datetime.now(seoul_timezone)
   today_date = today.strftime('%Y-%m-%d')
 
-  print(today_date)
   # url = f"http://hkconsensus.hankyung.com/apps.analysis/analysis.list?sdate={today_date}&edate={today_date}&now_page=1&search_value=&pagenum=20&search_text=&business_code="
   # print(url)
   upload_contents = extract_stock_report(today_date)

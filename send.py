@@ -1,7 +1,8 @@
 import telebot
+import os
 
-TELEGRAM_TOKEN='5636747753:AAH_JLSq1hhLB5kIHQfoVbpVxVeN6menFUU'
-CHAT_ID='5697250246'
+TELEGRAM_TOKEN=os.environ['TELEGRAM_TOKEN']
+CHAT_ID=os.environ['CHAT_ID']
 
 def telegram(body):
   bot = telebot.TeleBot(token=TELEGRAM_TOKEN)
