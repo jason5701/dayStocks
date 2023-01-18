@@ -3,9 +3,10 @@ from github_utils import get_github_repo, upload_github_issue
 import os
 from datetime import datetime
 from pytz import timezone
+from send import telegram
 
 if __name__ == '__main__':
-  access_token = os.environ['MY_GITHUB_TOKEN']
+  # access_token = os.environ['MY_GITHUB_TOKEN']
   repo_name = "dayStocks"
 
   seoul_timezone = timezone('Asia/Seoul')
@@ -16,8 +17,11 @@ if __name__ == '__main__':
   # print(url)
   upload_contents = extract_stock_report(today_date)
 
-  title = f"{today_date} 정보 알림"
+  # title = f"{today_date} 정보 알림"
+  # repo = get_github_repo(access_token, repo_name)
+  # upload_github_issue(repo, title, upload_contents)
+  
+  if(len(upload_contents) >0):
+    telegram(upload_contents)
 
-  repo = get_github_repo(access_token, repo_name)
-  upload_github_issue(repo, title, upload_contents)
   print('Upload done')
