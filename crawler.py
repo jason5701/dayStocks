@@ -52,21 +52,21 @@ def extract_stock_report(date):
       company_list.append(company)
       url_list.append(url)
 
-      content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
+      # content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
       telegramContent=f"- {category}, [{title}]({url})', {writer}, {company}\n"
       
     else:
-      content = '없음'
+      # content = '없음'
       telegramContent = '없음'
 
-    upload_contents += content
+    # upload_contents += content
     telegram_contetns += telegramContent
 
   df = pd.DataFrame({'category':category_list, 'title':title_list,'writer':writer_list,'company':company_list, 'url':url_list})
   df.to_csv("today_report.csv",encoding='utf-8')
 
   # telegram(telegram_contetns)
-  return upload_contents
+  return telegram_contetns
 
 
 # print(df)
