@@ -1,6 +1,4 @@
 from crawler import extract_stock_report
-from github_utils import get_github_repo, upload_github_issue
-import os
 from datetime import datetime
 from pytz import timezone
 from send import telegram
@@ -20,7 +18,7 @@ if __name__ == '__main__':
   # title = f"{today_date} 정보 알림"
   # repo = get_github_repo(access_token, repo_name)
   # upload_github_issue(repo, title, upload_contents)
-  
+
   if(len(upload_contents) >0):
     telegram(upload_contents)
 
