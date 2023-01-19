@@ -38,19 +38,17 @@ def extract_stock_report(date):
 
   for element in elements:
     isCheck = element.find_element(By.CSS_SELECTOR, 'td:nth-child(1)').text
-    print(isCheck)
     if isCheck == date:
       category = element.find_element(By.CSS_SELECTOR, "td:nth-child(2)").text
       title = element.find_element(By.CSS_SELECTOR, "td:nth-child(3)").text
       writer = element.find_element(By.CSS_SELECTOR, "td:nth-child(4)").text
       company = element.find_element(By.CSS_SELECTOR, "td:nth-child(5)").text
       url = element.find_element(By.CSS_SELECTOR, "td:nth-child(3) > a").get_attribute('href')
-
-      category_list.append(category)
-      title_list.append(title)
-      writer_list.append(writer)
-      company_list.append(company)
-      url_list.append(url)
+      # category_list.append(category)
+      # title_list.append(title)
+      # writer_list.append(writer)
+      # company_list.append(company)
+      # url_list.append(url)
 
       # content = f"- {category}, <a href='{url}'>{title}</a>, {writer}, {company}<br/>\n"
       telegramContent=f"- {category}, [{title}]({url})', {writer}, {company}\n"
@@ -61,9 +59,10 @@ def extract_stock_report(date):
 
     # upload_contents += content
     telegram_contetns += telegramContent
+    print(telegram_contetns)
 
-  df = pd.DataFrame({'category':category_list, 'title':title_list,'writer':writer_list,'company':company_list, 'url':url_list})
-  df.to_csv("today_report.csv",encoding='utf-8')
+  # df = pd.DataFrame({'category':category_list, 'title':title_list,'writer':writer_list,'company':company_list, 'url':url_list})
+  # df.to_csv("today_report.csv",encoding='utf-8')
 
   # telegram(telegram_contetns)
   return telegram_contetns

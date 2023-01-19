@@ -1,7 +1,7 @@
 from crawler import extract_stock_report
 from datetime import datetime
 from pytz import timezone
-from send import telegram
+from send import telegram, lastMessage
 
 if __name__ == '__main__':
   # access_token = os.environ['MY_GITHUB_TOKEN']
@@ -20,6 +20,7 @@ if __name__ == '__main__':
   # upload_github_issue(repo, title, upload_contents)
 
   if(upload_contents != '없음'):
+    # lastMessage()
     telegram(upload_contents)
 
   print('Upload done')
