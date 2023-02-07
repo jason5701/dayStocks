@@ -12,8 +12,6 @@ if __name__ == '__main__':
   repo = get_github_repo(access_token, repo_name)
   last_issue = get_github_issue(repo)
 
-  last_report_idx = last_issue[-6:]
-
   seoul_timezone = timezone('Asia/Seoul')
   today = datetime.now(seoul_timezone)
   today_date = today.strftime('%Y-%m-%d')
@@ -22,9 +20,9 @@ if __name__ == '__main__':
 
   dates = [before_week_date, today_date]
 
-  upload_contents, telegram_contents = extract_stock_report(dates, last_report_idx)
+  upload_contents, telegram_contents = extract_stock_report(dates, last_issue)
 
-  title = f"{today_date}, {last_report_idx}"
+  title = f"{today_date} 정보알림"
 
   if not upload_contents:
     print('there is no data')

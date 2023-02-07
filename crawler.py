@@ -6,7 +6,7 @@ import time
 
 # import chromedriver_autoinstaller
 
-def extract_stock_report(dates, last_report_idx):
+def extract_stock_report(dates, last_issue):
   options = webdriver.ChromeOptions()
   options.add_argument("start-maximized")
   options.add_argument("lang=ko_KR")
@@ -44,7 +44,7 @@ def extract_stock_report(dates, last_report_idx):
 
     report_idx = url[-6:]
     
-    if int(report_idx) <= int(last_report_idx):
+    if int(report_idx) <= last_issue:
       continue
 
     category_list.append(category)
