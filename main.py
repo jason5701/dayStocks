@@ -1,26 +1,35 @@
 from crawler import extract_stock_report
-from datetime import datetime
+from datetime import datetime, timedelta
 from pytz import timezone
-from send import telegram, lastMessage
+import os
+from send import telegram
+from github_utils import get_github_issue, get_github_repo, upload_github_issue
 
 if __name__ == '__main__':
-  # access_token = os.environ['MY_GITHUB_TOKEN']
+  access_token = os.environ['MY_GITHUB_TOKEN']
   repo_name = "dayStocks"
+
+  repo = get_github_repo(access_token, repo_name)
+  last_issue = get_github_issue(repo)
+
+  last_report_idx = last_issue[-6:]
 
   seoul_timezone = timezone('Asia/Seoul')
   today = datetime.now(seoul_timezone)
   today_date = today.strftime('%Y-%m-%d')
+  before_week = datetime.now(seoul_timezone) - timedelta(weeks=1)
+  before_week_date = before_week.strftime('%Y-%m-%d')
 
-  # url = f"http://hkconsensus.hankyung.com/apps.analysis/analysis.list?sdate={today_date}&edate={today_date}&now_page=1&search_value=&pagenum=20&search_text=&business_code="
-  # print(url)
-  upload_contents = extract_stock_report(today_date)
+  dates = [before_week_date, today_date]
 
-  # title = f"{today_date} 정보 알림"
-  # repo = get_github_repo(access_token, repo_name)
-  # upload_github_issue(repo, title, upload_contents)
+  upload_contents, telegram_contents = extract_stock_report(dates, last_report_idx)
 
-  if(upload_contents != '없음'):
-    # lastMessage()
-    telegram(upload_contents)
+  title = f"{today_date}, {last_report_idx}"
 
-  print('Upload done')
+  if not upload_contents:
+    print('there is no data')
+  else:
+    upload_github_issue(repo, title, upload_contents)
+    telegram(telegram_contents)
+    print('Upload done')
+

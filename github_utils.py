@@ -6,3 +6,8 @@ def get_github_repo(access_token, repo_name):
 
 def upload_github_issue(repo, title, body):
   repo.create_issue(title=title,body=body)
+
+def get_github_issue(repo):
+  issues = repo.get_issues()
+
+  return issues[0].title
